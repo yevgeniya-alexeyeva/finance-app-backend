@@ -2,8 +2,11 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const path = require('path');
-const transactionsRouter = require('./routes/api/transactions');
-const usersRouter = require('./routes/api/users');
+const {
+  usersRouter,
+  transactionsRouter,
+} = require('./routes/api/');
+
 
 const app = express();
 
