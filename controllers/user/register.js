@@ -3,8 +3,8 @@ const { v4 } = require('uuid');
 const sendMail = require('../../utils/sendGrid');
 const register = async (req, res, next) => {
   const newUser = req.body;
-  const { email } = newUser;
-  const findUser = await usersService.findUser(email);
+  const { email, name } = newUser;
+  const findUser = await usersService.findUser({ email });
   if (findUser) {
     res.status(409).json({
       status: 'conflict',
@@ -15,11 +15,11 @@ const register = async (req, res, next) => {
   }
   const verifyToken = v4();
   try {
-    const result = await usersService.register({
+    await usersService.register({
       ...newUser,
       verifyToken,
     });
-    const { balance } = result;
+
     const mail = {
       to: email,
       subject: 'Verification',
@@ -32,7 +32,7 @@ const register = async (req, res, next) => {
       message: 'User created',
       data: {
         email,
-        balance,
+        name,
       },
     });
   } catch (error) {

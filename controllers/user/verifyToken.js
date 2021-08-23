@@ -2,7 +2,7 @@ const { usersService } = require('../../services');
 
 const verifyToken = async (req, res, next) => {
   const { verifyToken } = req.params;
-  const findOne = await usersService.findUser(verifyToken);
+  const findOne = await usersService.findUser({ verifyToken });
   try {
     if (!findOne) {
       res
@@ -10,8 +10,8 @@ const verifyToken = async (req, res, next) => {
         .json({ status: 'error', code: 404, messasge: 'User not found' });
       return;
     }
-    const { id } = findOne;
-    await usersService.updateUser(id, {
+    const { _id } = findOne;
+    await usersService.updateUser(_id, {
       verifyToken: null,
       verify: true,
     });

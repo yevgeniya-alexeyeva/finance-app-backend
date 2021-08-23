@@ -5,6 +5,7 @@ const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const { usersRouter, transactionsRouter } = require('./routes/api/');
+require('./utils/passport-config');
 
 const app = express();
 

@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const { User } = require('../model');
 
 const register = ({ password, ...rest }) => {
   const newUser = new User({ ...rest });
@@ -7,10 +7,10 @@ const register = ({ password, ...rest }) => {
 };
 
 const findUser = (query) => {
-  User.findOne({ query });
+  return User.findOne(query);
 };
 const updateUser = (id, update) => {
-  User.findByIdAndUpdate(id, update, { useFindAndModify: false });
+  return User.findByIdAndUpdate(id, update, { useFindAndModify: false });
 };
 
 module.exports = { register, findUser, updateUser };
