@@ -2,11 +2,9 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const path = require('path');
-const {
-  usersRouter,
-  transactionsRouter,
-} = require('./routes/api/');
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const { usersRouter, transactionsRouter } = require('./routes/api/');
 
 const app = express();
 
@@ -16,10 +14,11 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routing
-app.use('/finapp-api/transactions', transactionsRouter);
-app.use('/finapp-api/users', usersRouter);
+app.use('/transactions', transactionsRouter);
+app.use('/users', usersRouter);
 app.use((_, res) => {
   res.status(404).json({ status: 'error', code: '404', message: 'Not found' });
 });
