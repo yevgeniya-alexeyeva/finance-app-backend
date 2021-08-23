@@ -1,7 +1,7 @@
 const { usersService } = require('../../services');
 const sendMail = require('../../utils/sendGrid');
 const resendVerifyEmail = async (req, res, next) => {
-  const { email } = req.params;
+  const { email } = req.user;
   if (!email) {
     res.status(400).json({
       status: 'error',
@@ -11,7 +11,7 @@ const resendVerifyEmail = async (req, res, next) => {
     return;
   }
   try {
-    const user = await usersService.findUser(email);
+    const user = await usersService.findUser({ email });
     if (!user) {
       res.status(404).json({
         status: 'error',

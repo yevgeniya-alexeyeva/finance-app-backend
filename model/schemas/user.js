@@ -44,11 +44,9 @@ const validateUser = (newUser) => {
   const addUserSchema = Joi.object({
     password: Joi.string().min(6).required(),
     email: Joi.string().email().required(),
+    name: Joi.string(),
   });
   const { error } = addUserSchema.validate(newUser);
   return error;
 };
-module.exports = {
-  validateUser,
-  userSchema,
-};
+module.exports = { userSchema, validateUser };
