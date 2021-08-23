@@ -8,7 +8,7 @@ sgMail.setApiKey(SENDGRID_KEY);
 const sendMail = async ({ to, subject, text, html }) => {
   const mail = {
     to,
-    from: '',
+    from: 'finance-app@meta.ua',
     subject,
     text,
     html,
