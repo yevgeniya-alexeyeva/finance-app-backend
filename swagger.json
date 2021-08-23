@@ -363,7 +363,7 @@
         "tags": [
           "Transactions"
         ],
-        "summary": "Get all user's transactions",
+        "summary": "Create new transaction",
         "parameters": [
           {
             "name": "Authorization",
