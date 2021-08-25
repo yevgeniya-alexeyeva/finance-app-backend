@@ -38,7 +38,7 @@ const transactionSchema = new Schema(
     transactionType: {
       type: String,
       enum: {
-        values: ['debit', 'credit'],
+        values: ['withdrawal', 'deposit'],
         message: '{VALUE} is not supported',
       },
       required: [true, 'TransactionType is required'],
