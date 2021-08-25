@@ -54,16 +54,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "email": {
-                      "type": "string"
-                    },
-                    "balance": {
-                      "type": "integer"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string"
+                        },
+                        "balance": {
+                          "type": "integer"
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "email": "useremail@example.com",
-                    "balance": 40
+                    "data": {
+                      "email": "useremail@example.com",
+                      "balance": 40
+                    }
                   }
                 }
               }
@@ -131,24 +138,26 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "token": {
-                      "type": "string"
-                    },
-                    "user": {
+                    "data": {
                       "type": "object",
-                      "email": {
-                        "type": "string"
-                      },
-                      "balance": {
-                        "type": "integer"
+                      "properties": {
+                        "token": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "example": {
-                    "token": "exampletoken",
-                    "user": {
+                    "data": {
+                      "token": "exampletoken",
                       "email": "example@example.com",
-                      "balance": 900
+                      "name": "examplename"
                     }
                   }
                 }
@@ -231,18 +240,24 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "user": {
+                    "data": {
                       "type": "object",
-                      "email": {
-                        "type": "string"
-                      },
-                      "balance": {
-                        "type": "integer"
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "balance": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "example": {
-                    "user": {
+                    "data": {
+                      "name": "exapmlename",
                       "email": "example@example.com",
                       "balance": 900
                     }
@@ -272,26 +287,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "year",
-            "description": "Transactions filtered by year",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "month",
-            "description": "Transactions filtered by month",
-            "in": "query",
-            "required": false,
-            "minimum": 1,
-            "maximum": 12,
-            "schema": {
-              "type": "integer"
-            }
           }
         ],
         "responses": {
@@ -312,12 +307,38 @@
                               "type": "string"
                             },
                             "date": {
-                              "type": "string"
+                              "type": "object",
+                              "day": {
+                                "type": "number",
+                                "minimum": 1,
+                                "maximum": 31
+                              },
+                              "month": {
+                                "type": "string",
+                                "enum": [
+                                  "january",
+                                  "february",
+                                  "march",
+                                  "april",
+                                  "may",
+                                  "june",
+                                  "july",
+                                  "august",
+                                  "september",
+                                  "october",
+                                  "november",
+                                  "december"
+                                ]
+                              },
+                              "year": {
+                                "type": "number",
+                                "minimum": 1900
+                              }
                             },
                             "transactionType": {
                               "type": "string"
                             },
-                            "categoryId": {
+                            "category": {
                               "type": "string"
                             },
                             "comment": {
@@ -338,9 +359,13 @@
                     "data": [
                       {
                         "id": "417f51e810c19729de860ea",
-                        "date": "1975-08-19T23:15:30.000Z",
+                        "date": {
+                          "day": 2,
+                          "month": "january",
+                          "year": 2008
+                        },
                         "transactionType": "credit",
-                        "categoryId": "507f191e810c19729de860ea",
+                        "category": "507f191e810c19729de860ea",
                         "comment": "40 litres of diesel",
                         "amount": 45,
                         "balance": 90
@@ -383,7 +408,35 @@
                 "type": "object",
                 "properties": {
                   "date": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "day": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 31
+                      },
+                      "month": {
+                        "type": "string",
+                        "enum": [
+                          "january",
+                          "february",
+                          "march",
+                          "april",
+                          "may",
+                          "june",
+                          "july",
+                          "august",
+                          "september",
+                          "october",
+                          "november",
+                          "december"
+                        ]
+                      },
+                      "year": {
+                        "type": "number",
+                        "minimum": 1900
+                      }
+                    }
                   },
                   "transactionType": {
                     "type": "string",
@@ -397,16 +450,20 @@
                     "required": true
                   },
                   "comment": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                   },
                   "amount": {
                     "type": "integer",
-                    "required": true
+                    "required": true,
+                    "minimum": 0
                   }
                 },
                 "example": {
-                  "date": "1975-08-19T23:15:30.000Z",
+                  "date": {
+                    "day": 2,
+                    "month": "january",
+                    "year": 2008
+                  },
                   "transactionType": "credit",
                   "categoryId": "507f191e810c19729de860ea",
                   "comment": "40 litres of diesel",
@@ -425,37 +482,181 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array"
+                      "properties": {
+                        "date": {
+                          "type": "object",
+                          "properties": {
+                            "day": {
+                              "type": "number",
+                              "minimum": 1,
+                              "maximum": 31
+                            },
+                            "month": {
+                              "type": "string",
+                              "enum": [
+                                "january",
+                                "february",
+                                "march",
+                                "april",
+                                "may",
+                                "june",
+                                "july",
+                                "august",
+                                "september",
+                                "october",
+                                "november",
+                                "december"
+                              ]
+                            },
+                            "year": {
+                              "type": "number",
+                              "minimum": 1900
+                            }
+                          }
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "transactionType": {
+                          "type": "string",
+                          "enum": [
+                            "credit",
+                            "debit"
+                          ]
+                        },
+                        "categoryId": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "comment": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "required": true,
+                          "minimum": 0
+                        },
+                        "balance": {
+                          "type": "integer"
+                        }
+                      }
                     }
                   },
                   "example": {
                     "data": {
-                      "id": "417f51e810c19729de860ea",
-                      "date": "1975-08-19T23:15:30.000Z",
+                      "date": {
+                        "day": 2,
+                        "month": "january",
+                        "year": 2008
+                      },
+                      "id": "697f191e810c13978de860ea",
                       "transactionType": "credit",
                       "categoryId": "507f191e810c19729de860ea",
                       "comment": "40 litres of diesel",
                       "amount": 45,
-                      "balance": 90
+                      "balance": 9000
                     }
                   }
                 }
               }
+            },
+            "400": {
+              "description": "Validation error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "message": "validation error message"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "404": {
+              "description": "User not found"
+            }
+          }
+        }
+      }
+    },
+    "/transactions/filter": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Get all user's transactions",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Token issued to a current user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           },
-          "400": {
-            "description": "Validation error",
+          {
+            "name": "year",
+            "description": "Transactions filtered by year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "month",
+            "description": "Transactions filtered by month",
+            "in": "query",
+            "required": false,
+            "minimum": 1,
+            "maximum": 12,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users' transactions' sum by category",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string"
+                    "data": {
+                      "type": "array",
+                      "properties": {
+                        "category": {
+                          "type": "object",
+                          "properties": {
+                            "categoryId": {
+                              "type": "string"
+                            },
+                            "amount": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "example": {
-                    "message": "validation error message"
+                    "data": [
+                      {
+                        "categoryId": "417f51e810c19729de860ea",
+                        "amount": 2400
+                      }
+                    ]
                   }
                 }
               }
@@ -465,7 +666,7 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "User not found"
+            "description": "No such user's collection"
           }
         }
       }
@@ -474,6 +675,17 @@
       "get": {
         "tags": [
           "Transactions"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "description": "Token issued to a current user",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "summary": "Get all transactions' categories",
         "responses": {
@@ -485,13 +697,23 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array"
+                      "type": "array",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
                     }
                   },
                   "example": {
                     "data": [
-                      "Groceries",
-                      "Fuel"
+                      {
+                        "id": "65kf67fdf6f66ff6ffl4",
+                        "name": "Groceries"
+                      }
                     ]
                   }
                 }
@@ -517,14 +739,41 @@
             "type": "string",
             "description": "A unique id generated by backend"
           },
-          "userId": {
-            "type": "string"
+          "owner": {
+            "type": "string",
+            "description": "Owners id"
           },
-          "categoryId": {
-            "type": "string"
+          "category": {
+            "type": "string",
+            "description": "Category id"
           },
           "date": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "integer"
+              },
+              "month": {
+                "type": "string",
+                "enum": [
+                  "january",
+                  "february",
+                  "march",
+                  "april",
+                  "may",
+                  "june",
+                  "july",
+                  "august",
+                  "september",
+                  "october",
+                  "november",
+                  "december"
+                ]
+              },
+              "year": {
+                "type": "integer"
+              }
+            }
           },
           "transactionType": {
             "type": "string",
@@ -537,6 +786,9 @@
             "type": "string"
           },
           "amount": {
+            "type": "integer"
+          },
+          "balanceAfter": {
             "type": "integer"
           }
         }
@@ -559,6 +811,17 @@
           },
           "balance": {
             "type": "integer"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         }
       }
