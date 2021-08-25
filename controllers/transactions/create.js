@@ -11,7 +11,8 @@ const create = async (req, res, next) => {
       _id: userId,
     });
 
-    if (transactionType === 'debit') {
+    if (transactionType === 'credit') {
+      console.log(balance - amount < 0);
       if (balance - amount < 0) {
         return res.json({
           status: 'error',
