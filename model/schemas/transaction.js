@@ -1,31 +1,71 @@
 const { Schema, SchemaTypes } = require('mongoose');
 
-const transactionSchema = new Schema({
-  date: {
-    type: String,
-    required: [true, 'Date is required'],
+const transactionSchema = new Schema(
+  {
+    date: {
+      year: {
+        type: Number,
+        required: [true, 'Year is required'],
+      },
+      month: {
+        type: String,
+        enum: {
+          values: [
+            'january',
+            'february',
+            'march',
+            'april',
+            'may',
+            'june',
+            'july',
+            'august',
+            'september',
+            'october',
+            'november',
+            'december',
+          ],
+          message: '{VALUE} is not supported',
+        },
+        required: [true, 'Month is required'],
+      },
+      day: {
+        type: Number,
+        min: [1, 'Must be at least 1, got {VALUE}'],
+        max: [31, 'Must not be more than 31, got {VALUE}'],
+        required: [true, 'Day is required'],
+      },
+    },
+    transactionType: {
+      type: String,
+      enum: {
+        values: ['debit', 'credit'],
+        message: '{VALUE} is not supported',
+      },
+      required: [true, 'TransactionType is required'],
+    },
+    comment: {
+      type: String,
+      default: null,
+    },
+    amount: {
+      type: Number,
+      min: [0, 'Must be more than 0, got {VALUE}'],
+      required: [true, 'Amount is required'],
+    },
+    balanceAfter: {
+      type: Number,
+      required: true,
+    },
+    owner: {
+      type: SchemaTypes.ObjectId,
+      ref: 'user',
+    },
+    category: {
+      type: SchemaTypes.ObjectId,
+      ref: 'category',
+    },
   },
-  transactionType: {
-    type: Number,
-    enum: ["debit", "credit"],
-    required: [true, 'TransactionType is required']
-  },
-  comment: {
-    type: String,
-    default: null,
-  },
-  amount: {
-    type: Number,
-    required: [true, 'Amount is required'],
-  },
-  userId: {
-    type: SchemaTypes.ObjectId,
-    ref: 'transaction',
-  },
-  categoryId: {
-    type: SchemaTypes.ObjectId,
-    ref: 'category',
-  },
-});
+  { versionKey: false, timestamps: true }
+);
 
 module.exports = transactionSchema;

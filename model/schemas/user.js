@@ -4,19 +4,19 @@ const Joi = require('joi');
 const userSchema = Schema(
   {
     name: {
-      type: 'string',
+      type: String,
       required: true,
     },
     email: {
-      type: 'string',
+      type: String,
       required: true,
     },
     password: {
-      type: 'string',
+      type: String,
       required: true,
     },
     balance: {
-      type: 'number',
+      type: Number,
       default: 0,
     },
     token: {
