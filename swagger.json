@@ -719,7 +719,9 @@
             "type": "object",
             "properties": {
               "day": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 31
               },
               "month": {
                 "type": "integer",
@@ -727,7 +729,8 @@
                 "maximum": 12
               },
               "year": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 1900
               }
             }
           },
