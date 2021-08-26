@@ -7,6 +7,6 @@ const {
 } = require('../../controllers');
 
 router.post('/', middle.verifyToken, ctrl.create);
-router.post('/categories', middle.verifyToken, categoriesCtrl.getAll);
+router.get('/categories', middle.verifyToken, categoriesCtrl.getAll);
 
 module.exports = { router };
