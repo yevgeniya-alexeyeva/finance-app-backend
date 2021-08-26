@@ -8,24 +8,9 @@ const transactionSchema = new Schema(
         required: [true, 'Year is required'],
       },
       month: {
-        type: String,
-        enum: {
-          values: [
-            'january',
-            'february',
-            'march',
-            'april',
-            'may',
-            'june',
-            'july',
-            'august',
-            'september',
-            'october',
-            'november',
-            'december',
-          ],
-          message: '{VALUE} is not supported',
-        },
+        type: Number,
+        min: [1, 'Must be at least 1, got {VALUE}'],
+        max: [12, 'Must not be more than 12, got {VALUE}'],
         required: [true, 'Month is required'],
       },
       day: {

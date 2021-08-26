@@ -314,21 +314,9 @@
                                 "maximum": 31
                               },
                               "month": {
-                                "type": "string",
-                                "enum": [
-                                  "january",
-                                  "february",
-                                  "march",
-                                  "april",
-                                  "may",
-                                  "june",
-                                  "july",
-                                  "august",
-                                  "september",
-                                  "october",
-                                  "november",
-                                  "december"
-                                ]
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 12
                               },
                               "year": {
                                 "type": "number",
@@ -365,7 +353,7 @@
                         "id": "417f51e810c19729de860ea",
                         "date": {
                           "day": 2,
-                          "month": "january",
+                          "month": 12,
                           "year": 2008
                         },
                         "transactionType": "withdrawal",
@@ -420,21 +408,9 @@
                         "maximum": 31
                       },
                       "month": {
-                        "type": "string",
-                        "enum": [
-                          "january",
-                          "february",
-                          "march",
-                          "april",
-                          "may",
-                          "june",
-                          "july",
-                          "august",
-                          "september",
-                          "october",
-                          "november",
-                          "december"
-                        ]
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 12
                       },
                       "year": {
                         "type": "number",
@@ -465,7 +441,7 @@
                 "example": {
                   "date": {
                     "day": 2,
-                    "month": "january",
+                    "month": 1,
                     "year": 2008
                   },
                   "transactionType": "withdrawal",
@@ -496,21 +472,9 @@
                               "maximum": 31
                             },
                             "month": {
-                              "type": "string",
-                              "enum": [
-                                "january",
-                                "february",
-                                "march",
-                                "april",
-                                "may",
-                                "june",
-                                "july",
-                                "august",
-                                "september",
-                                "october",
-                                "november",
-                                "december"
-                              ]
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 12
                             },
                             "year": {
                               "type": "number",
@@ -550,7 +514,7 @@
                     "data": {
                       "date": {
                         "day": 2,
-                        "month": "january",
+                        "month": 2,
                         "year": 2008
                       },
                       "id": "697f191e810c13978de860ea",
@@ -625,7 +589,7 @@
             "minimum": 1,
             "maximum": 12,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -758,21 +722,9 @@
                 "type": "integer"
               },
               "month": {
-                "type": "string",
-                "enum": [
-                  "january",
-                  "february",
-                  "march",
-                  "april",
-                  "may",
-                  "june",
-                  "july",
-                  "august",
-                  "september",
-                  "october",
-                  "november",
-                  "december"
-                ]
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12
               },
               "year": {
                 "type": "integer"
