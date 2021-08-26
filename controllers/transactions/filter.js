@@ -15,19 +15,21 @@ const filter = async (req, res, next) => {
       return item.transactionType === 'deposit' ? (acc += item.amount) : acc;
     }, 0);
 
-    const totalCost = transactions.reduce((acc, item) => {
-      return item.transactionType === 'withdrawal' ? (acc += item.amount) : acc;
-    }, 0);
+    const totalCost = +transactions
+      .reduce((acc, item) => {
+        return item.transactionType === 'withdrawal'
+          ? (acc += item.amount)
+          : acc;
+      }, 0)
+      .toFixed(2);
 
     const filteredCosts = categoriesList.map((category) => {
-      const sum = transactions
-        .reduce((acc, item) => {
-          return item.category + '' === category.id &&
-            item.transactionType === 'withdrawal'
-            ? (acc += item.amount)
-            : acc;
-        }, 0)
-        .toFixed(2);
+      const sum = transactions.reduce((acc, item) => {
+        return item.category + '' === category.id &&
+          item.transactionType === 'withdrawal'
+          ? (acc += item.amount)
+          : acc;
+      }, 0);
 
       return { category: category.name, amount: sum };
     });
