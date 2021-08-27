@@ -9,6 +9,7 @@ const register = ({ password, ...rest }) => {
 const findUser = (query) => {
   return User.findOne(query);
 };
+
 const updateUser = (id, update) => {
   return User.findByIdAndUpdate(id, update, { useFindAndModify: false });
 };

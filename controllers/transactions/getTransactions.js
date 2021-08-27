@@ -1,7 +1,8 @@
 const { transactions: service } = require('../../services');
+
 const getTransactions = async (req, res, next) => {
   const { _id: userId } = req.user;
-  
+
   try {
     const result = await service.getAll(userId);
     if (!result) {

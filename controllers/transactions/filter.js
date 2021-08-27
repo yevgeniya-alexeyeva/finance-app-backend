@@ -1,6 +1,6 @@
 const { categories } = require('../../services');
 
-const { getFilteredTransactions } = require('../../services');
+const { transactions: service } = require('../../services');
 
 const filter = async (req, res, next) => {
   const { _id: id } = req.user;
@@ -9,7 +9,11 @@ const filter = async (req, res, next) => {
   try {
     const categoriesList = await categories.getAll();
 
-    const transactions = await getFilteredTransactions(id, +month, +year);
+    const transactions = await service.getFilteredTransactions(
+      id,
+      +month,
+      +year
+    );
 
     const income = transactions.reduce((acc, item) => {
       return item.transactionType === 'deposit' ? (acc += item.amount) : acc;
