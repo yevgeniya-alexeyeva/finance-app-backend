@@ -9,6 +9,6 @@ const {
 router.post('/', middle.verifyToken, ctrl.create);
 router.get('/', middle.verifyToken, ctrl.getTransactions);
 router.get('/filter', middle.verifyToken, ctrl.filter);
-router.post('/categories', middle.verifyToken, categoriesCtrl.getAll);
+router.get('/categories', middle.verifyToken, categoriesCtrl.getAll);
 
 module.exports = { router };
