@@ -7,6 +7,7 @@ const {
 } = require('../../controllers');
 
 router.post('/', middle.verifyToken, ctrl.create);
+router.get('/', middle.verifyToken, ctrl.getTransactions);
 router.get('/filter', middle.verifyToken, ctrl.filter);
 router.get('/categories', middle.verifyToken, categoriesCtrl.getAll);
 
