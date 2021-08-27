@@ -1,6 +1,6 @@
 const { categories } = require('../../services');
 
-const getFilteredTransactions = require('../../services/getFilteredTransactions');
+const { getFilteredTransactions } = require('../../services');
 
 const filter = async (req, res, next) => {
   const { _id: id } = req.user;
