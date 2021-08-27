@@ -19,9 +19,9 @@ const create = async (req, res, next) => {
           message: 'Insufficient balance',
         });
       }
-      balanceAfter = balance - amount;
+      balanceAfter = (balance - amount).toFixed(2);
     } else {
-      balanceAfter = balance + amount;
+      balanceAfter = (balance + amount).toFixed(2);
     }
 
     await usersService.updateUser(userId, {
