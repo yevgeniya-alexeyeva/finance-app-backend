@@ -10,16 +10,21 @@ const getAll = async (owner) => {
 };
 
 const getFilteredTransactions = async (id, month, year) => {
-  {
+  if (!month) {
     const data = await Transaction.find({
       owner: id,
       'date.year': year,
-      'date.month': month,
     });
-
     return data;
   }
+
+  const data = await Transaction.find({
+    owner: id,
+    'date.year': year,
+    'date.month': month,
+  });
+
+  return data;
 };
 
-
-module.exports = { create, getAll, getFilteredTransactions, };
+module.exports = { create, getAll, getFilteredTransactions };
