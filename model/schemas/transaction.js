@@ -37,7 +37,7 @@ const transactionSchema = new Schema(
       min: [0, 'Must be more than 0, got {VALUE}'],
       required: [true, 'Amount is required'],
     },
-    balanceAfter: {
+    balance: {
       type: Number,
       required: true,
     },
