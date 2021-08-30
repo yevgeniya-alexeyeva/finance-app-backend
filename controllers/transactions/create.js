@@ -34,7 +34,7 @@ const create = async (req, res, next) => {
       comment,
       amount,
       category: categoryId,
-      balanceAfter,
+      balance: balanceAfter,
     });
 
     res.status(201).json({
@@ -44,7 +44,7 @@ const create = async (req, res, next) => {
         date,
         id: _doc._id,
         transactionType,
-        categoryId,
+        category: categoryId,
         comment,
         amount,
         balance: balanceAfter,
