@@ -29,7 +29,7 @@ const filter = async (req, res, next) => {
 
     const filteredCosts = categoriesList.map((category) => {
       const sum = transactions.reduce((acc, item) => {
-        return item.category + '' === category.id &&
+        return item.categoryId + '' === category.id &&
           item.transactionType === 'withdrawal'
           ? (acc += item.amount)
           : acc;
