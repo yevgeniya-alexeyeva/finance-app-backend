@@ -33,7 +33,7 @@ const create = async (req, res, next) => {
       transactionType,
       comment,
       amount,
-      category: categoryId,
+      categoryId,
       balance: balanceAfter,
     });
 
@@ -44,7 +44,7 @@ const create = async (req, res, next) => {
         date,
         id: _doc._id,
         transactionType,
-        category: categoryId,
+        categoryId,
         comment,
         amount,
         balance: balanceAfter,
