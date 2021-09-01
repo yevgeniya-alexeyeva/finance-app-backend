@@ -28,10 +28,12 @@ const resendVerifyEmail = async (req, res, next) => {
       });
       return;
     }
+    
     const mail = {
       to: email,
-      subject: 'Verification',
-      text: `http://localhost:3000/users/verify/${user.verifyToken}`,
+      subject: 'Please Verify Your Wallet',
+      text: "Let's verify your email so you can start to use your Wallet",
+      html: `<a href="https://finance-app-wallet.herokuapp.com/${user.verifyToken}">Let's verify your email so you can start to use your Wallet</a>`,
     };
     sendMail(mail);
     res.json({
